@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 1921153186779302916}
   - component: {fileID: 776232706144184277}
   - component: {fileID: 430193657915251171}
+  - component: {fileID: 5474796779684543736}
   m_Layer: 0
   m_Name: 0Player
   m_TagString: Player
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
   crouching: 0
+  PLAYERID: 0
 --- !u!114 &7102979721195569158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +238,7 @@ MonoBehaviour:
   Punch: {fileID: -13183087405012578, guid: 9cbbcf7887639524681cd1e9690846a4, type: 3}
   CrouchPunch: {fileID: -983130076069356988, guid: 9cbbcf7887639524681cd1e9690846a4,
     type: 3}
+  punching: 0
   otherPlayer: {fileID: 0}
 --- !u!65 &1921153186779302916
 BoxCollider:
@@ -262,9 +265,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b5058e6244af34a9fceec2318f5b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffer: 0.2
   pass: {fileID: 3051614276229271918, guid: d5e1f39b5da10194cadb34d590b4e771, type: 3}
   fail: {fileID: 304097640533699736, guid: d1ec0448416bdec4197063e1323d2cf2, type: 3}
   punching: 0
+  passed: 0
+  InputTrackingOn: 1
 --- !u!114 &430193657915251171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,3 +286,17 @@ MonoBehaviour:
   note:
   - {fileID: 1932356589741735821, guid: 01d2b5064ce89604cbd9fcba8b836ed0, type: 3}
   - {fileID: 1932356589741735821, guid: d3d03edcccc45a8479ace8afc41112b0, type: 3}
+--- !u!114 &5474796779684543736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102979721195569161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907ec62fb82f2ad459687eb38bf6d67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 2959333176516585344, guid: ef63235cf5ad1b44383b0bdedeaed789,
+    type: 3}

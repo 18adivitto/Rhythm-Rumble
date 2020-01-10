@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,8 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
     public bool crouching = false;
 
+    public int PLAYERID;
+    Player player;
+
     void Start()
     {
+        PLAYERID = int.Parse(this.gameObject.name[0].ToString());
+        player = ReInput.players.GetPlayer(PLAYERID);
+
         CamData = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         AnimData = GetComponent<PlayerAnimations>();
         characterController = GetComponent<CharacterController>();
@@ -42,16 +49,16 @@ public class PlayerMovement : MonoBehaviour
             // We are grounded, so recalculate
             // move direction directly from axes
 
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0);
+            moveDirection = new Vector3(player.GetAxis("Horizontal"), 0.0f, 0);
             moveDirection *= speed;
 
-            if (Input.GetKey(KeyCode.W))
+            if (player.GetButton("Jump"))
             {
                 moveDirection.y = jumpSpeed;
             }
             slidingOff = false;
 
-            if (Input.GetKey(KeyCode.S))
+            if (player.GetButton("Crouch"))
             {
                 crouching = true;
             }
@@ -63,18 +70,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         moveDirection.y -= gravity * Time.deltaTime;
-        if (this.gameObject.name[0] == '0') //FOR DEBUGGING ONLY
-        {
+
             if (crouching || AnimData.punching)
             {
                 moveDirection.x = 0;
             }
-        }
-        else
-        {
-            moveDirection.x = 0;
-            moveDirection.y = -1;
-        }
+
         characterController.Move(moveDirection * Time.deltaTime);
     }
     void ColliderPos()

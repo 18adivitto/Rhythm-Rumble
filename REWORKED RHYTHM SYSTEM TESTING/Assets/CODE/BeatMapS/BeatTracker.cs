@@ -8,12 +8,13 @@ public class BeatTracker : MonoBehaviour
 
     public float secPerBeat;
 
-
     public float songPosInBeats;
 
     public float songPosInSec;
 
     public float dspSongTime;
+
+    public float songTimeInRealSec;
 
     //public float beatsInSong;
 

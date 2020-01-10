@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class PlayerAnimations : MonoBehaviour
 {
@@ -41,9 +42,14 @@ public class PlayerAnimations : MonoBehaviour
 
     public Transform otherPlayer;
 
+    int PLAYERID;
+    Player player;
     // Start is called before the first frame update
     void Start()
     {
+        PLAYERID = int.Parse(this.gameObject.name[0].ToString());
+        player = ReInput.players.GetPlayer(PLAYERID);
+
         beatDetect = GetComponent<PlayerBeatDetection>();
         Controls = GetComponent<PlayerMovement>();
         cc = GetComponent<CharacterController>();
@@ -148,7 +154,7 @@ public class PlayerAnimations : MonoBehaviour
             SR.sprite = CrouchPunch;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && !punching)
+        if (player.GetButtonDown("Light_Punch") && !punching)
         {
             punchBeatNo = stageMusic.songPosInBeats + .25f;
             punching = true;
